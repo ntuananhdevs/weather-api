@@ -1,25 +1,17 @@
-package main
+package config
 
 import (
-	"fmt"
 	"log"
-
 	"github.com/spf13/viper"
 )
 
 func LoadConfig() {
-	viper.SetConfigFile("env")
+	viper.SetConfigFile("../.env")
 	if err := viper.ReadInConfig(); err != nil {
-		log.Fatal(err)	
-	} else {
-		log.Println("Config file loaded")
+		log.Fatalf("Không thể đọc file config: %v", err)
 	}
 }
 
-func GetApiKey() string {
+func GetAPIKey() string {
 	return viper.GetString("API_KEY")
-}
-func main () {
-	LoadConfig()
-	fmt.Println(GetApiKey())
 }
